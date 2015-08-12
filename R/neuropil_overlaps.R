@@ -23,6 +23,9 @@ neuropil_overlaps<-function(nps, raw=FALSE){
   # replace standard column names with short neuropil names
   np_names=sapply(attr(df,'units'),'[[','name')
   colnames(df)[match(names(np_names), colnames(df))]=np_names
+
+  # imgIds may as well be integer
+  df$imgId=as.integer(df$imgId)
   df
 }
 
