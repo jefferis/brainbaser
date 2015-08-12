@@ -19,13 +19,17 @@ neuropil_overlaps<-function(nps, raw=FALSE){
   stop_for_status(x)
   cx=content(x)
   if(raw) return(cx)
-  bb_json_df(cx)
+  df=bb_json_df(cx)
+  # replace standard column names with short neuropil names
+  np_names=sapply(attr(df,'units'),'[[','name')
+  colnames(df)[match(names(np_names), colnames(df))]=np_names
+  df
 }
 
 # Convert a Brainbase JSON query result into a dataframe
 bb_json_df<-function(x,varnames=NULL,stringsAsFactors=FALSE){
-  num_neuropils=length(x[[1]])
-  lc=as.data.frame(lapply(seq_len(2L+num_neuropils),
+  num_vars=length(x[['data']][[1]])
+  lc=as.data.frame(lapply(seq_len(num_vars),
                           function(c) sapply(x[['data']],'[[',c)),
                    stringsAsFactors=stringsAsFactors)
   names(lc) = if(is.null(varnames)) names(x[['data']][[1]]) else varnames
