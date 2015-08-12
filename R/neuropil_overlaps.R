@@ -10,6 +10,8 @@
 #' @examples
 #' x=neuropil_overlaps(1152)
 #' @importFrom httr GET stop_for_status content
+#' @seealso The \code{\link{neuropils}} data.frame contains details of the
+#'   different neuropil regions.
 neuropil_overlaps<-function(nps, raw=FALSE){
   # empirically there is some shift required here
   if(is.numeric(nps)) nps=nps+249L
