@@ -1,10 +1,14 @@
 Package: brainbaser
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Programmatic Access to the Brainbase Drosophila Neuroanatomy Website
 Version: 0.1
 Date: 2015-08-12
 Author: Gregory Jefferis
-Maintainer: "Gregory Jefferis <jefferis@gmail.com> [aut, cre]"
-Description: More about what it does (maybe more than one line)
+Maintainer: Gregory Jefferis <jefferis@gmail.com>
+Description: Brainbase Web provides information about brain expression patterns
+  of a large collection of genetic driver lines. brainbaser enables programmatic
+  queries of expression levels for different neuropil domains, download of image
+  data and other utility functions.
 License: GPL-3
 LazyData: TRUE
+Url: http://brainbase.imp.ac.at/
