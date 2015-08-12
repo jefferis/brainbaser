@@ -2,6 +2,7 @@
 #'
 #' @param nps The neuropils to fetch as integer ids. A non-finite value implies
 #'   all neuropils.
+#' @param raw Whether to return raw JSON result
 #'
 #' @return processed data.frame
 #' @export
@@ -21,7 +22,7 @@ neuropil_overlaps<-function(nps, raw=FALSE){
   bb_json_df(cx)
 }
 
-#' Convert a Brainbase JSON query result into a dataframe
+# Convert a Brainbase JSON query result into a dataframe
 bb_json_df<-function(x,varnames=NULL,stringsAsFactors=FALSE){
   num_neuropils=length(x[[1]])
   lc=as.data.frame(lapply(seq_len(2L+num_neuropils),
