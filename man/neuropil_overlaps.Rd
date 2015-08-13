@@ -15,13 +15,26 @@ neuropils, respectively.}
 \item{raw}{Whether to return raw JSON result}
 }
 \value{
-processed data.frame
+processed \code{data.frame} with columns \itemize{
+
+  \item imgId Integer image id
+
+  \item name Image name
+
+  \item ... additional columns
+  expressing the fraction of each neuropil domain occupied by foreground
+  voxels and titled with the abbreviated neuropil names.}
 }
 \description{
 Fetch fractional overlap for each neuropil for all images in BrainBase
 }
 \examples{
 x=neuropil_overlaps(1152)
+
+\dontrun{
+all_brain=neuropil_overlaps('brain')
+all_vnc=neuropil_overlaps('vnc')
+}
 }
 \seealso{
 The \code{\link{neuropils}} data.frame contains details of the

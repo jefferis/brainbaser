@@ -6,14 +6,26 @@
 #'   neuropils, respectively.
 #' @param raw Whether to return raw JSON result
 #'
-#' @return processed data.frame
-#' @export
+#' @return processed \code{data.frame} with columns \itemize{
 #'
-#' @examples
-#' x=neuropil_overlaps(1152)
+#'   \item imgId Integer image id
+#'
+#'   \item name Image name
+#'
+#'   \item ... additional columns
+#'   expressing the fraction of each neuropil domain occupied by foreground
+#'   voxels and titled with the abbreviated neuropil names.}
+#' @export
 #' @importFrom httr GET stop_for_status content
 #' @seealso The \code{\link{neuropils}} data.frame contains details of the
 #'   different neuropil regions.
+#' @examples
+#' x=neuropil_overlaps(1152)
+#'
+#' \dontrun{
+#' all_brain=neuropil_overlaps('brain')
+#' all_vnc=neuropil_overlaps('vnc')
+#' }
 neuropil_overlaps<-function(nps, raw=FALSE){
   # empirically there is some shift required here
   if(is.character(nps)) {
