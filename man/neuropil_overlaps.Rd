@@ -7,8 +7,10 @@
 neuropil_overlaps(nps, raw = FALSE)
 }
 \arguments{
-\item{nps}{The neuropils to fetch as integer ids. A non-finite value implies
-all neuropils.}
+\item{nps}{The neuropils to fetch, specified either as integer ids or as the
+character vector abbreviated neuropil name (see \code{\link{neuropils} in
+both cases}. The special values of "brain" and "vnc" imply all brain or vnc
+neuropils, respectively.}
 
 \item{raw}{Whether to return raw JSON result}
 }
@@ -20,5 +22,9 @@ Fetch fractional overlap for each neuropil for all images in BrainBase
 }
 \examples{
 x=neuropil_overlaps(1152)
+}
+\seealso{
+The \code{\link{neuropils}} data.frame contains details of the
+  different neuropil regions.
 }
 

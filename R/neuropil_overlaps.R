@@ -1,7 +1,9 @@
 #' Fetch fractional overlap for each neuropil for all images in BrainBase
 #'
-#' @param nps The neuropils to fetch as integer ids. A non-finite value implies
-#'   all neuropils.
+#' @param nps The neuropils to fetch, specified either as integer ids or as the
+#'   character vector abbreviated neuropil name (see \code{\link{neuropils} in
+#'   both cases}. The special values of "brain" and "vnc" imply all brain or vnc
+#'   neuropils, respectively.
 #' @param raw Whether to return raw JSON result
 #'
 #' @return processed data.frame
@@ -14,7 +16,15 @@
 #'   different neuropil regions.
 neuropil_overlaps<-function(nps, raw=FALSE){
   # empirically there is some shift required here
-  if(is.numeric(nps)) nps=nps+249L
+  if(is.character(nps)) {
+    nps <- if(length(nps)==1 && nps %in%c("brain", "vnc"))
+      brainbaser::neuropils$id[brainbaser::neuropils$tissue==nps]
+    else brainbaser::neuropils$id[match(nps, brainbaser::neuropils$abbrev)]
+  }
+
+  if(is.numeric(nps)) {
+    nps=nps+249L
+  } else stop("invalid neuropil specification!")
   baseurl="http://brainbase.imp.ac.at/bbweb/infovisdata?nsst=0&st=as&ast=imgStain&nst="
 
   x=GET(paste0(baseurl, paste(nps, collapse = ",")))
