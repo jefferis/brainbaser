@@ -4,7 +4,8 @@
 \alias{neuropil_overlaps}
 \title{Fetch fractional overlap for each neuropil for all images in BrainBase}
 \usage{
-neuropil_overlaps(nps, raw = FALSE)
+neuropil_overlaps(nps, raw = FALSE, normalised_by = c("neuropil",
+  "staining"))
 }
 \arguments{
 \item{nps}{The neuropils to fetch, specified either as integer ids or as the
@@ -13,6 +14,10 @@ both cases}. The special values of "brain" and "vnc" imply all brain or vnc
 neuropils, respectively.}
 
 \item{raw}{Whether to return raw JSON result}
+
+\item{normalised_by}{How to normalise the results. This denominator can
+  either be the total number of voxels in each \bold{neuropil} region or the
+  total amount of \code{staining} in the whole expression pattern.}
 }
 \value{
 processed \code{data.frame} with columns \itemize{
@@ -21,9 +26,9 @@ processed \code{data.frame} with columns \itemize{
 
   \item name Image name
 
-  \item ... additional columns
-  expressing the fraction of each neuropil domain occupied by foreground
-  voxels and titled with the abbreviated neuropil names.}
+  \item ... additional columns expressing the fraction of each neuropil
+  domain occupied by foreground voxels and titled with the abbreviated
+  neuropil names.}
 }
 \description{
 Fetch fractional overlap for each neuropil for all images in BrainBase

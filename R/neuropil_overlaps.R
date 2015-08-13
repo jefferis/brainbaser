@@ -5,6 +5,9 @@
 #'   both cases}. The special values of "brain" and "vnc" imply all brain or vnc
 #'   neuropils, respectively.
 #' @param raw Whether to return raw JSON result
+#' @param normalised_by How to normalise the results. This denominator can
+#'   either be the total number of voxels in each \bold{neuropil} region or the
+#'   total amount of \code{staining} in the whole expression pattern.
 #'
 #' @return processed \code{data.frame} with columns \itemize{
 #'
@@ -12,9 +15,9 @@
 #'
 #'   \item name Image name
 #'
-#'   \item ... additional columns
-#'   expressing the fraction of each neuropil domain occupied by foreground
-#'   voxels and titled with the abbreviated neuropil names.}
+#'   \item ... additional columns expressing the fraction of each neuropil
+#'   domain occupied by foreground voxels and titled with the abbreviated
+#'   neuropil names.}
 #' @export
 #' @importFrom httr GET stop_for_status content
 #' @seealso The \code{\link{neuropils}} data.frame contains details of the
@@ -26,8 +29,8 @@
 #' all_brain=neuropil_overlaps('brain')
 #' all_vnc=neuropil_overlaps('vnc')
 #' }
-neuropil_overlaps<-function(nps, raw=FALSE){
-  # empirically there is some shift required here
+neuropil_overlaps<-function(nps, raw=FALSE, normalised_by=c("neuropil","staining")){
+  normalised_by=match.arg(normalised_by)
   if(is.character(nps)) {
     nps <- if(length(nps)==1 && nps %in%c("brain", "vnc"))
       brainbaser::neuropils$id[brainbaser::neuropils$tissue==nps]
@@ -35,9 +38,12 @@ neuropil_overlaps<-function(nps, raw=FALSE){
   }
 
   if(is.numeric(nps)) {
+    # empirically there is some shift required here
     nps=nps+249L
   } else stop("invalid neuropil specification!")
-  baseurl="http://brainbase.imp.ac.at/bbweb/infovisdata?nsst=0&st=as&ast=imgStain&nst="
+  baseurl=paste0("http://brainbase.imp.ac.at/bbweb/infovisdata?nsst=",
+                 ifelse(normalised_by=='neuropil',0,1),
+                 "&st=as&ast=imgStain&nst=")
 
   x=GET(paste0(baseurl, paste(nps, collapse = ",")))
   stop_for_status(x)
