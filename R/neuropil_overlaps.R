@@ -4,7 +4,7 @@
 #'   character vector abbreviated neuropil name (see \code{\link{neuropils} in
 #'   both cases}. The special values of "brain" and "vnc" imply all brain or vnc
 #'   neuropils, respectively.
-#' @param raw Whether to return raw JSON result
+#' @param raw Whether to return the raw httr result
 #' @param normalised_by How to normalise the results. This denominator can
 #'   either be the total number of voxels in each \bold{neuropil} region or the
 #'   total amount of \code{staining} in the whole expression pattern.
@@ -26,6 +26,9 @@
 #' x=neuropil_overlaps(1152)
 #'
 #' \dontrun{
+#' r=neuropil_overlaps(1152, raw=TRUE)
+#' json_content=content(r)
+#'
 #' all_brain=neuropil_overlaps('brain')
 #' all_vnc=neuropil_overlaps('vnc')
 #' }
@@ -47,9 +50,8 @@ neuropil_overlaps<-function(nps, raw=FALSE, normalised_by=c("neuropil","staining
 
   x=GET(paste0(baseurl, paste(nps, collapse = ",")))
   stop_for_status(x)
-  cx=content(x)
-  if(raw) return(cx)
-  df=bb_json_df(cx)
+  if(raw) return(x)
+  df=bb_json_df(x)
   # replace standard column names with short neuropil names
   np_names=sapply(attr(df,'units'),'[[','name')
   colnames(df)[match(names(np_names), colnames(df))]=np_names
@@ -61,6 +63,7 @@ neuropil_overlaps<-function(nps, raw=FALSE, normalised_by=c("neuropil","staining
 
 # Convert a Brainbase JSON query result into a dataframe
 bb_json_df<-function(x,varnames=NULL,stringsAsFactors=FALSE){
+  x=content(x)
   num_vars=length(x[['data']][[1]])
   lc=as.data.frame(lapply(seq_len(num_vars),
                           function(c) sapply(x[['data']],'[[',c)),

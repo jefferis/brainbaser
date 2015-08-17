@@ -13,7 +13,7 @@ character vector abbreviated neuropil name (see \code{\link{neuropils} in
 both cases}. The special values of "brain" and "vnc" imply all brain or vnc
 neuropils, respectively.}
 
-\item{raw}{Whether to return raw JSON result}
+\item{raw}{Whether to return the raw httr result}
 
 \item{normalised_by}{How to normalise the results. This denominator can
   either be the total number of voxels in each \bold{neuropil} region or the
@@ -37,6 +37,9 @@ Fetch fractional overlap for each neuropil for all images in BrainBase
 x=neuropil_overlaps(1152)
 
 \dontrun{
+r=neuropil_overlaps(1152, raw=TRUE)
+json_content=content(r)
+
 all_brain=neuropil_overlaps('brain')
 all_vnc=neuropil_overlaps('vnc')
 }
