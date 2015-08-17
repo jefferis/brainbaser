@@ -1,4 +1,12 @@
 # brainbaser
+## Introduction
+[Brainbase Web](brainbase.imp.ac.at) is an interactive website containing
+information about neurons in the Drosophila (fruit fly) nervous system. It
+includes brain expression patterns of a large collection of genetic driver
+lines, the Vienna Tiles (VT) collection. brainbaser enables programmatic queries
+of expression levels for different neuropil domains, download of image data and
+other utility functions.
+
 ## Quick Start
 
 For the impatient ...
@@ -12,12 +20,12 @@ devtools::install_github("jefferis/brainbaser")
 library(brainbaser)
 
 # run examples
-example("xxx")
+example("neuropil_overlaps")
 
 # get overview help for package
 ?brainbaser
 # help for functions
-?xxx
+?neuropil_overlaps
 
 # run tests
 library(testthat)
