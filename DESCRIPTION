@@ -6,11 +6,13 @@ Date: 2015-08-12
 Author: Gregory Jefferis
 Maintainer: Gregory Jefferis <jefferis@gmail.com>
 Description: Brainbase Web is an interactive website containing information
-  about neurons in the Drosophila (fruit fly) nervous system. It includes brain expression patterns
-  of a large collection of genetic driver lines, the . brainbaser enables programmatic
-  queries of expression levels for different neuropil domains, download of image
-  data and other utility functions.
+  about neurons in the Drosophila (fruit fly) nervous system. It includes brain
+  expression patterns of a large collection of genetic driver lines, the Vienna
+  Tiles (VT) collection. brainbaser enables programmatic queries of expression
+  levels for different neuropil domains, download of image data and other
+  utility functions.
 License: GPL-3
 LazyData: TRUE
 Url: http://brainbase.imp.ac.at/
+BugReports: https://github.com/jefferis/brainbaser/issues
 Imports: httr
