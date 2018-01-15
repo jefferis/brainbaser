@@ -24,6 +24,7 @@
 #'   different neuropil regions.
 #' @examples
 #' x=neuropil_overlaps(1152)
+#' y=neuropil_overlaps(1152, normalised_by="staining")
 #'
 #' \dontrun{
 #' r=neuropil_overlaps(1152, raw=TRUE)
