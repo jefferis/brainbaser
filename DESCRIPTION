@@ -3,8 +3,7 @@ Type: Package
 Title: Programmatic Access to the Brainbase Drosophila Neuroanatomy Website
 Version: 0.1
 Date: 2015-08-12
-Author: Gregory Jefferis
-Maintainer: Gregory Jefferis <jefferis@gmail.com>
+Authors@R: person("Gregory", "Jefferis", , "jefferis@gmail.com", role = c("aut", "cre"))
 Description: Brainbase Web is an interactive website containing information
   about neurons in the Drosophila (fruit fly) nervous system. It includes brain
   expression patterns of a large collection of genetic driver lines, the Vienna
